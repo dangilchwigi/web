@@ -11,6 +11,7 @@ module.exports = {
         DeepGray: '#807F7E',
         Error: '#E73B2F',
         White: '#ffffff',
+        Info: '#456CB5',
       },
     },
   },
