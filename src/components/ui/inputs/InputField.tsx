@@ -1,5 +1,5 @@
 import React, { FC, InputHTMLAttributes } from 'react';
-import { VscChromeClose } from 'react-icons/vsc';
+import { MdClose } from 'react-icons/md';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
@@ -28,7 +28,7 @@ const InputField: FC<Props> = ({ isError = false, errorMessage, ...props }) => {
       <input className={className} {...props} />
       {isError && !!errorMessage && (
         <span className='flex items-center mt-2 body3 text-Error'>
-          <VscChromeClose className='ml-1 mr-2' />
+          <MdClose className='ml-1 mr-2' />
           <p>{errorMessage}</p>
         </span>
       )}
