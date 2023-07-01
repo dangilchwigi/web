@@ -1,4 +1,4 @@
-import React, { FC, ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
 type Type = 'primary' | 'secondary';
 
@@ -6,7 +6,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: Type;
 }
 
-const Button: FC<Props> = ({ type, children, theme = 'primary', ...props }) => {
+const Button = ({ type, children, theme = 'primary', ...props }: Props) => {
   const className = (() => {
     let baseClasses = 'body2 px-8 py-[14px] rounded ';
 
@@ -20,6 +20,10 @@ const Button: FC<Props> = ({ type, children, theme = 'primary', ...props }) => {
         baseClasses +=
           ' active:opacity-60 bg-Secondary text-Primary cursor-pointer';
       }
+    }
+
+    if (props.className) {
+      baseClasses += ` ${props.className}`;
     }
 
     return baseClasses;

@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { MdClose } from 'react-icons/md';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -6,7 +6,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
 }
 
-const InputField: FC<Props> = ({ isError = false, errorMessage, ...props }) => {
+const InputField = ({ isError = false, errorMessage, ...props }: Props) => {
   const className = (() => {
     let baseClasses =
       'px-4 py-3 rounded body1 border-DeepGray bg-White w-[300px] border-[1px] focus:outline-none';
@@ -18,6 +18,10 @@ const InputField: FC<Props> = ({ isError = false, errorMessage, ...props }) => {
 
     if (props.disabled) {
       baseClasses += ' border-Gray placeholder:text-Gray text-Gray';
+    }
+
+    if (props.className) {
+      baseClasses += ` ${props.className}`;
     }
 
     return baseClasses;

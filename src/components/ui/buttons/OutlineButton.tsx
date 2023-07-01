@@ -1,10 +1,10 @@
-import React, { FC, ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
-const OutlineButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+const OutlineButton = ({
   type,
   children,
   ...props
-}) => {
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
   const className = (() => {
     let baseClasses = 'body2 px-8 py-[14px] rounded border-[1px]  bg-White';
 
@@ -13,6 +13,10 @@ const OutlineButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
     } else {
       baseClasses +=
         ' border-Primary text-Primary active:bg-opacity-60 active:bg-Primary cursor-pointer';
+    }
+
+    if (props.className) {
+      baseClasses += ` ${props.className}`;
     }
 
     return baseClasses;
