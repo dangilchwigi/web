@@ -1,17 +1,20 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { ReactNode } from 'react';
 import { MdCheck } from 'react-icons/md';
 
-interface Props extends InputHTMLAttributes<HTMLButtonElement> {
+interface Props {
   isChecked?: boolean;
   disabled?: boolean;
+  children: ReactNode;
   onValueChangeHandler?: (checked: boolean) => void;
 }
 
 const Checkbox = (props: Props) => {
   const { children, disabled, isChecked, onValueChangeHandler } = props;
   const onClickHandler = () => {
-    if (onValueChangeHandler) {
-      onValueChangeHandler(!isChecked);
+    if (!disabled) {
+      if (onValueChangeHandler) {
+        onValueChangeHandler(!isChecked);
+      }
     }
   };
 
@@ -30,25 +33,28 @@ const Checkbox = (props: Props) => {
   })();
 
   return (
-    <div className='flex items-center'>
-      <input type='checkbox' className='hidden' />
-      <label className={className} onClick={onClickHandler}>
+    <div
+      className={`flex items-center cursor-pointer ${
+        disabled ? 'pointer-events-none' : ''
+      }`}
+      onClick={onClickHandler}
+    >
+      <div className={className}>
         {isChecked && (
           <MdCheck
             size={16}
             className={`text-base ${disabled ? 'text-DeepGray' : 'text-White'}`}
           />
         )}
-      </label>
+      </div>
       {children && (
-        <label
-          onClick={onClickHandler}
+        <div
           className={`ml-2 body3 cursor-pointer ${
             disabled ? 'pointer-events-none' : ''
           }`}
         >
           {children}
-        </label>
+        </div>
       )}
     </div>
   );
