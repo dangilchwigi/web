@@ -1,10 +1,10 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 
-const OutlineButton = ({
-  type,
-  children,
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+}
+
+const OutlineButton = ({ children, ...props }: Props) => {
   const className = (() => {
     let baseClasses = 'body2 px-8 py-[14px] rounded border-[1px]  bg-White';
 
@@ -22,7 +22,7 @@ const OutlineButton = ({
     return baseClasses;
   })();
   return (
-    <button type={type} {...props} className={className}>
+    <button {...props} className={className}>
       {children}
     </button>
   );
