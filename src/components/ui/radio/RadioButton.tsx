@@ -15,12 +15,14 @@ const RadioButton = (props: Props) => {
 
   const className = (() => {
     let baseClasses =
-      'flex items-center justify-center w-6 h-6 border-Gray border-[1px] rounded-full';
+      'flex items-center justify-center w-6 h-6  border-[1px] rounded-full';
 
     if (disabled) {
-      baseClasses += ' bg-Primary pointer-events-none';
+      baseClasses += ' bg-Primary pointer-events-none border-Primary';
     } else {
-      baseClasses += ' cursor-pointer';
+      baseClasses += ` cursor-pointer ${
+        isChecked ? 'border-Primary' : 'border-Gray'
+      }`;
     }
     return baseClasses;
   })();
