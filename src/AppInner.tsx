@@ -24,6 +24,7 @@ const Together = React.lazy(() => import('./pages/Together'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 
 const AppInner = () => {
+  const visibleRoutes = ['/home', '/together', '/profile'];
   const navItems = [
     { label: '홈', icon: <MdHome size={24} />, path: '/home' },
     {
@@ -39,11 +40,14 @@ const AppInner = () => {
     },
     { label: '프로필', icon: <MdAccountCircle size={24} />, path: '/profile' },
   ];
+
+  const shouldShowNavs = visibleRoutes.includes(window.location.pathname);
+
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Suspense fallback={<div>...loading</div>}>
-          <AppBar title='타이틀' />
+          {shouldShowNavs && <AppBar title='타이틀' />}
           <RouteTransition>
             <Routes>
               <Route path='/' element={<Auth />} />
@@ -54,7 +58,7 @@ const AppInner = () => {
               <Route path='/profile' element={<Profile />} />
             </Routes>
           </RouteTransition>
-          <BottomNavigation items={navItems} />
+          {shouldShowNavs && <BottomNavigation items={navItems} />}
         </Suspense>
       </BrowserRouter>
     </RecoilRoot>
