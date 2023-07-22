@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { UserState } from '../../store/atom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const objectToQueryString = (obj: object) => {
 };
 
 const Auth = () => {
-  const [User, setUser] = useRecoilState(UserState);
+  const setUser = useSetRecoilState(UserState);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -46,8 +46,20 @@ const Auth = () => {
           },
         });
 
-        console.log(kakao_account.email);
-        navigate('/home');
+        // console.log(kakao_account.email);
+
+        const result = await axios.post('/api/auth/login', {
+          email: kakao_account.email,
+          // email: 'youngsock32@nate.com',
+        });
+        console.log(result);
+
+        if (result.status === 200) {
+          setUser(result.data.nickname);
+          navigate('/home');
+        } else if (result.status === 202) {
+          navigate('/onboarding');
+        }
       } catch (error) {}
     };
 
